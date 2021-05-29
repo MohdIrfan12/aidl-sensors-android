@@ -8,11 +8,13 @@ import com.abdulansari.IMainService
 import com.abdulansari.SensorData
 
 class SensorService : Service() {
+
     override fun onBind(intent: Intent?): IBinder? {
         return binder
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        println("Service onStartCommand")
         return START_STICKY
     }
 
@@ -28,5 +30,10 @@ class SensorService : Service() {
             println("received command for unregisterOrientationData")
             stopSelf()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("Service is stopping")
     }
 }

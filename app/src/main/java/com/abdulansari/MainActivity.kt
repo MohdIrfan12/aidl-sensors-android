@@ -17,27 +17,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    override fun onStart() {
+        super.onStart()
         bindAndStartService()
+    }
+
+    override fun unbindService(conn: ServiceConnection) {
+        super.unbindService(conn)
+        unbindService(serviceConnection)
     }
 
     private fun bindAndStartService() {
         val serviceIntent = Intent()
             .setComponent(
                 ComponentName(
-                    "com.abdulansari.service",
+                    "com.abdulansari",
                     "com.abdulansari.service.SensorService"
                 )
             )
-//        serviceIntent.action = "MyCompanyRequestService"
-//        serviceIntent.setPackage("com.abdulansari")
-
-        println("Starting service…")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = startForegroundService(serviceIntent)
-            println(name)
-        } else {
-            startService(serviceIntent)
-        }
         println("Binding service…")
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }

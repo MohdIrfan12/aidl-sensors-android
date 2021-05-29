@@ -12,9 +12,6 @@
             android:exported="true"
             android:label="Testing..."
             tools:ignore="ExportedService">
-            <intent-filter>
-                <action android:name="MyCompanyRequestService" />
-            </intent-filter>
         </service>
     </application>
 </manifest>
